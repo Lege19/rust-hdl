@@ -38,7 +38,7 @@ impl<const N: usize> ShortBitVec<N> {
     }
 
     #[inline(always)]
-    pub fn get_bit(&self, index: usize) -> bool {
+    pub const fn get_bit(&self, index: usize) -> bool {
         self.0 & (1 << index) != 0
     }
 

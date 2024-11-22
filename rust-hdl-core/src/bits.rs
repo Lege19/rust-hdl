@@ -907,7 +907,7 @@ impl<const N: usize> Bits<N> {
     /// assert_eq!(x.get_bit(1), true);
     /// assert_eq!(x.get_bit(2), true); // You get the idea
     /// ```
-    pub fn get_bit(&self, index: usize) -> bool {
+    pub const fn get_bit(&self, index: usize) -> bool {
         assert!(index < N);
         match self {
             Bits::Short(x) => x.get_bit(index),

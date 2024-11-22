@@ -18,7 +18,7 @@ impl<const N: usize> From<BitVec<N>> for [bool; N] {
 }
 
 impl<const N: usize> BitVec<N> {
-    pub fn bits(&self) -> [bool; N] {
+    pub const fn bits(&self) -> [bool; N] {
         self.bits
     }
 
@@ -59,7 +59,7 @@ impl<const N: usize> BitVec<N> {
         ret
     }
 
-    pub fn get_bit(&self, ndx: usize) -> bool {
+    pub const fn get_bit(&self, ndx: usize) -> bool {
         assert!(ndx < N);
         self.bits[ndx]
     }
