@@ -148,6 +148,20 @@ impl<T: Synth> LogicLink for Signal<InOut, T> {
 }
 
 impl<D: Direction, T: Synth> Signal<D, T> {
+    pub fn new(t: T) -> Self {
+        Self {
+            next: t,
+            val: t,
+            prev: t,
+            changed: false,
+            claimed: false,
+            id: get_signal_id(),
+            tristate_is_output: false,
+            signal_is_undriven: false,
+            constraints: vec![],
+            dir: PhantomData,
+        }
+    }
     pub fn add_constraint(&mut self, constraint: PinConstraint) {
         self.constraints.push(constraint);
     }
