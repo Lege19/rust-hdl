@@ -272,6 +272,7 @@ fn hdl_compute(m: &syn::Expr) -> Result<TS> {
         Expr::Call(call) => hdl_call(call),
         Expr::MethodCall(method) => hdl_method(method),
         Expr::Lit(lit) => hdl_literal(lit),
+        Expr::Cast(cast) => hdl_cast(cast),
         Expr::Index(_ndx) => {
             let ndx_expanded = common::fixup_ident(quote!(#m).to_string());
             Ok(quote!(ast::VerilogExpression::Signal(#ndx_expanded.to_string())))
@@ -281,6 +282,10 @@ fn hdl_compute(m: &syn::Expr) -> Result<TS> {
             format!("Unsupported expression type: {:?}", m),
         )),
     }
+}
+
+fn hdl_cast(cast: &syn::ExprCast) -> Result<TS> {
+    hdl_compute(&cast.expr)
 }
 
 fn hdl_unop(unop: &syn::ExprUnary) -> Result<TS> {
